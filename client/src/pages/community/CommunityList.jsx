@@ -12,7 +12,7 @@ const CommunityList = () => {
   const token = localStorage.getItem("token");
   const user = JSON.parse(localStorage.getItem("user"));
 
-  // ✅ Fetch all communities
+  // Fetch all communities
   useEffect(() => {
     const fetchCommunities = async () => {
       if (!token || !user) {
@@ -22,9 +22,12 @@ const CommunityList = () => {
       }
 
       try {
-        const res = await axios.get("http://localhost:5000/api/communities", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await axios.get(
+          "https://safecity-ifru.onrender.com/api/communities",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         setCommunities(res.data);
       } catch (err) {
         console.error("Error fetching communities", err);
@@ -36,18 +39,21 @@ const CommunityList = () => {
     fetchCommunities();
   }, [navigate, token, user]);
 
-  // ✅ Handle joining a community
+  // Handle joining a community
   const handleJoin = async (id) => {
     try {
       await axios.post(
-        `http://localhost:5000/api/communities/${id}/join`,
+        `https://safecity-ifru.onrender.com/api/communities/${id}/join`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
       // Refresh community list after joining
-      const res = await axios.get("http://localhost:5000/api/communities", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await axios.get(
+        "https://safecity-ifru.onrender.com/api/communities",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       setCommunities(res.data);
     } catch (err) {
       console.error("Error joining community", err);
@@ -62,7 +68,7 @@ const CommunityList = () => {
     );
   }
 
-  // ✅ Filter communities based on search input
+  // Filter communities based on search input
   const filteredCommunities = communities.filter((c) =>
     c.name.toLowerCase().includes(search.toLowerCase())
   );
@@ -75,7 +81,7 @@ const CommunityList = () => {
           Discover Communities
         </h1>
 
-        {/* ✅ Search bar */}
+        {/*Search bar */}
         <input
           type="text"
           placeholder="Search communities..."
@@ -89,7 +95,7 @@ const CommunityList = () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredCommunities.map((community) => {
-              // ✅ Safe check so it never crashes if members is missing
+              // Safe check so it never crashes if members is missing
               const isMember = community.members?.includes(user.id);
 
               return (
@@ -121,7 +127,7 @@ const CommunityList = () => {
               );
             })}
 
-            {/* ✅ Create community button */}
+            {/* Create community button */}
             <div
               className="flex items-center justify-center bg-gray-900 border-2 border-dashed border-gray-400 rounded-xl cursor-pointer hover:bg-gray-800 transition h-32"
               onClick={() => navigate("/create-community")}

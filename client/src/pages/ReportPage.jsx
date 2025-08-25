@@ -39,12 +39,16 @@ const ReportPage = () => {
     if (photo) formData.append("photo", photo);
 
     try {
-      await axios.post("http://localhost:5000/api/reports", formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      await axios.post(
+        "https://safecity-ifru.onrender.com/api/reports",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
       toast.success("Report submitted successfully!");
       navigate(`/communities/${communityId}`);

@@ -14,9 +14,12 @@ const ReportDetails = () => {
     const fetchReport = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get(`http://localhost:5000/api/reports/${id}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await axios.get(
+          `https://safecity-ifru.onrender.com/api/reports/${id}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         setReport(res.data);
       } catch (err) {
         console.error("Error fetching report:", err);

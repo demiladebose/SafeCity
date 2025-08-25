@@ -14,7 +14,7 @@ const CreateCommunity = () => {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.post(
-        "http://localhost:5000/api/communities",
+        "https://safecity-ifru.onrender.com/api/communities",
         { name, description, isPublic },
         { headers: { Authorization: `Bearer ${token}` } }
       );

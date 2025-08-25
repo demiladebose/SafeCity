@@ -24,13 +24,13 @@ const CommunityDetail = () => {
         const token = localStorage.getItem("token");
 
         const res = await axios.get(
-          `http://localhost:5000/api/communities/${id}`,
+          `https://safecity-ifru.onrender.com/api/communities/${id}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setCommunity(res.data);
 
         const reportsRes = await axios.get(
-          `http://localhost:5000/api/reports/community/${id}`,
+          `https://safecity-ifru.onrender.com/api/reports/community/${id}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setReports(reportsRes.data || []);
@@ -58,9 +58,12 @@ const CommunityDetail = () => {
 
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/api/communities/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.delete(
+        `https://safecity-ifru.onrender.com/api/communities/${id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
       toast.success("Community deleted"); // toast success
       navigate("/");
@@ -74,7 +77,7 @@ const CommunityDetail = () => {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.put(
-        `http://localhost:5000/api/communities/${id}`,
+        `https://safecity-ifru.onrender.com/api/communities/${id}`,
         { name: editName, description: editDesc },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -92,7 +95,7 @@ const CommunityDetail = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.patch(
-        `http://localhost:5000/api/reports/${reportId}/status`,
+        `https://safecity-ifru.onrender.com/api/reports/${reportId}/status`,
         { status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );
