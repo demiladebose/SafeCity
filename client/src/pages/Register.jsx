@@ -22,11 +22,11 @@ const Register = () => {
         }
       );
 
-      toast.success("Signup was successful!"); // ✅ toast success
+      toast.success("Signup was successful!"); //  toast success
       navigate("/login");
     } catch (error) {
       toast.error(
-        `Signup failed: ${error.response?.data?.message || error.message}` // ✅ toast error
+        `Signup failed: ${error.response?.data?.message || error.message}` //  toast error
       );
     }
   };
@@ -36,7 +36,7 @@ const Register = () => {
       <Navbar />
       <section className="bg-black transition text-white min-h-screen flex items-center justify-center relative overflow-hidden">
         <form
-          onSubmit={handleRegister} // ✅ updated function name
+          onSubmit={handleRegister} //  updated function name
           className="bg-gray-900 p-8 rounded-lg shadow-md w-full max-w-md"
         >
           <h2 className="text-2xl font-bold text-center text-green-600 mb-6">
